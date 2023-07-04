@@ -19,7 +19,7 @@ const errorHandlerMiddleware = require("./middleware/error-handler");
 const connectDB = require("./db/connect");
 const authMiddleware = require("./middleware/authentication");
 
-app.use("trust proxy", 1);
+app.set("trust proxy", 1);
 app.use(
   rateLimiter({
     windowMs: 15 * 60 * 1000, // 15 minutes
