@@ -1,0 +1,239 @@
+openapi: 3.0.0
+info:
+  title: Jobs API
+  contact: {}
+  version: "1.0"
+servers:
+  - url: https://jobs-api-a8l4.onrender.com/api/v1
+    variables: {}
+paths:
+  /auth/register:
+    post:
+      tags:
+        - Auth
+      summary: User Register
+      operationId: UserRegister
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/UserRegisterRequest"
+                - example:
+                    name: Amrutha3
+                    email: amrutha3@gmail.com
+                    password: Kacb123.
+            example:
+              name: Amrutha3
+              email: amrutha3@gmail.com
+              password: Kacb123.
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+  /auth/login:
+    post:
+      tags:
+        - Auth
+      summary: Login User
+      operationId: LoginUser
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/LoginUserRequest"
+                - example:
+                    email: arunchaitanya@gmail.com
+                    password: Kacb123.
+            example:
+              email: arunchaitanya@gmail.com
+              password: Kacb123.
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security: []
+  /jobs:
+    post:
+      tags:
+        - Jobs
+      summary: Create Job
+      operationId: CreateJob
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/CreateJobRequest"
+                - example:
+                    company: Facebook
+                    position: Nurse
+            example:
+              company: Facebook
+              position: Nurse
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    get:
+      tags:
+        - Jobs
+      summary: Get All User Jobs
+      operationId: GetAllUserJobs
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+  /jobs/{id}:
+    parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+        description: The job ID
+    get:
+      tags:
+        - Jobs
+      summary: Get Single User Job
+      operationId: GetSingleUserJob
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    patch:
+      tags:
+        - Jobs
+      summary: Update User Job
+      operationId: UpdateUserJob
+      parameters: []
+      requestBody:
+        description: ""
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: "#/components/schemas/UpdateUserJobRequest"
+                - example:
+                    company: Alphabets
+                    position: Junior Developer
+            example:
+              company: Alphabets
+              position: Junior Developer
+        required: true
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+    delete:
+      tags:
+        - Jobs
+      summary: Delete User Job
+      operationId: DeleteUserJob
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          headers: {}
+      deprecated: false
+      security:
+        - bearer: []
+components:
+  schemas:
+    UserRegisterRequest:
+      title: UserRegisterRequest
+      required:
+        - name
+        - email
+        - password
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        name: Amrutha3
+        email: amrutha3@gmail.com
+        password: Kacb123.
+    LoginUserRequest:
+      title: LoginUserRequest
+      required:
+        - email
+        - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: arunchaitanya@gmail.com
+        password: Kacb123.
+    CreateJobRequest:
+      title: CreateJobRequest
+      required:
+        - company
+        - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: Facebook
+        position: Nurse
+    UpdateUserJobRequest:
+      title: UpdateUserJobRequest
+      required:
+        - company
+        - position
+      type: object
+      properties:
+        company:
+          type: string
+        position:
+          type: string
+      example:
+        company: Alphabets
+        position: Junior Developer
+  securitySchemes:
+    bearer:
+      type: http
+      scheme: bearer
+security: []
+tags:
+  - name: Auth
+    description: ""
+  - name: Jobs
+    description: ""
